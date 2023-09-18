@@ -89,6 +89,7 @@ func (databaseReader *DatabaseReader) Read(ctx context.Context) ([]*metadata.Met
 
 	if len(result) > 0 {
 		err = scrapererror.NewPartialScrapeError(err, len(multierr.Errors(err)))
+
 	}
 
 	return result, err
