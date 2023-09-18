@@ -75,11 +75,10 @@ func (databaseReader *DatabaseReader) Read(ctx context.Context) ([]*metadata.Met
 	for _, reader := range databaseReader.readers {
 		dataPoints, err := reader.Read(ctx)
 		if err != nil {
-			return nil, fmt.Errorf("cannot read data for data points databaseReader %q because of an error: %w",
-				reader.Name(), err)
+			logger.Errorf("cannot read data for data points databaseReader %q because of an error: %w")
+		} else {
+			result = append(result, dataPoints...)
 		}
-
-		result = append(result, dataPoints...)
 	}
 
 	return result, nil
